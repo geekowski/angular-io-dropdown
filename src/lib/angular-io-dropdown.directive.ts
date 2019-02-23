@@ -23,7 +23,6 @@ export class AngularioDropdownDirective implements OnInit {
   }
   @HostListener('click', ['$event']) onClick(event: Event) {
     this.assignHost();
-    console.log({eventFired: this.eventListenerFired, dropdownOpen:  this.dropdown});
     if (this.eventListenerFired && !this.dropdown ) {
       this.executeClickOutside(event);
       this.eventListenerFired = false;
