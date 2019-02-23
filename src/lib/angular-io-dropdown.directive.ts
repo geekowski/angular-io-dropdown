@@ -11,6 +11,7 @@ export class AngularioDropdownDirective implements OnInit {
   clickOutsideEvent: any;
   dropdownOpen: boolean;
   clickHost: any;
+  eventListenerFired = false;
 
   @Input()
   get dropdown() {
@@ -22,10 +23,15 @@ export class AngularioDropdownDirective implements OnInit {
   }
   @HostListener('click', ['$event']) onClick(event: Event) {
     this.assignHost();
-    this.clickHost = this.elementRef.nativeElement;
-    if (!this.dropdown) {
-      this.executeClickInside();
-      this.bindClickOutside();
+    console.log({eventFired: this.eventListenerFired, dropdownOpen:  this.dropdown});
+    if (this.eventListenerFired && !this.dropdown ) {
+      this.executeClickOutside(event);
+      this.eventListenerFired = false;
+    } else {
+      if (!this.dropdown) {
+        this.executeClickInside();
+        this.bindClickOutside();
+      }
     }
   }
   assignHost(): void {
@@ -46,6 +52,7 @@ export class AngularioDropdownDirective implements OnInit {
       this.dropdown = false;
       this.dropdownChange.emit(this.dropdown);
       this.document.body.removeEventListener('click', this.executeClickOutside);
+      this.eventListenerFired = false;
     }
   }
 
@@ -62,6 +69,7 @@ export class AngularioDropdownDirective implements OnInit {
 
   bindClickOutside(): void {
     this.document.body.addEventListener('click', this.executeClickOutside);
+    this.eventListenerFired = true;
   }
 
   ngOnInit() {
