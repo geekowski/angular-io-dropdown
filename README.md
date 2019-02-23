@@ -18,7 +18,7 @@ import { AngularioDropdownModule } from 'node_modules/angular-io-dropdown';
 ```ts
 dropdownOpen = false;
 ```
-It can alse be true if you want your dropdown shown on start.
+It can also be true if you want your dropdown is shown on start.
 
 ### Template
 ```html
@@ -38,7 +38,7 @@ It can alse be true if you want your dropdown shown on start.
 
 ### Styles 
 
-Feel free to use this styles: 
+Feel free to use: 
 
 ```scss
 $color--border: #f2f2f2;
