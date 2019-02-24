@@ -47,7 +47,7 @@ export class AngularioDropdownDirective implements OnInit {
     this.dropdownChange.emit(this.dropdown);
   }
   executeClickOutside = (event: Event) => {
-    if (this.isChildInParent(event.target, this.clickHost)) {
+    if (!this.isChildInParent(event.target, this.clickHost)) {
       this.dropdown = false;
       this.dropdownChange.emit(this.dropdown);
       this.document.body.removeEventListener('click', this.executeClickOutside);
@@ -55,7 +55,7 @@ export class AngularioDropdownDirective implements OnInit {
     }
   }
 
-  isChildInParent(parent: any, child: any): boolean {
+  isChildInParent(child: any, parent: any, ): boolean {
     let node = child.parentNode;
     while (node != null) {
         if (node === parent) {
